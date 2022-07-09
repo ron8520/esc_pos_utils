@@ -819,7 +819,7 @@ class Generator {
     int colWidth = 12,
     int maxCharsPerLine,
   }) {
-    var labelCmd = new LabelCmd(60, 40);
+    var labelCmd = new LabelCmd(60, 40, 0);
 
     labelCmd.addText(0, 0, FontType.FONT_1, Rotation.ROTATION_0, Fontmul.MUL_1,
         Fontmul.MUL_1, text);
