@@ -35,9 +35,10 @@ class LabelCmd {
         unsupportedEncodingException.printStackTrace();
       }
 
-      for (var i in bs) {
-        this.command.add(bs[i]);
-      }
+      // for (var i in bs) {
+      //   this.command.add(bs[i]);
+      // }
+      this.command += bs;
     }
   }
 
