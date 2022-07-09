@@ -8,6 +8,7 @@
 
 import 'dart:convert';
 import 'dart:typed_data' show Uint8List;
+import 'package:esc_pos_utils/src/LabelCmd.dart';
 import 'package:hex/hex.dart';
 import 'package:image/image.dart';
 import 'package:gbk_codec/gbk_codec.dart';
@@ -346,6 +347,7 @@ class Generator {
     PosStyles styles = const PosStyles(),
     int linesAfter = 0,
     bool containsChinese = false,
+    bool isLabel = false,
     int maxCharsPerLine,
   }) {
     List<int> bytes = [];
@@ -602,7 +604,9 @@ class Generator {
     // Adjust line spacing (for 16-unit line feeds): ESC 3 0x10 (HEX: 0x1b 0x33 0x10)
     bytes += [27, 51, 16];
     for (int i = 0; i < blobs.length; ++i) {
-      bytes += List.from(header)..addAll(blobs[i])..addAll('\n'.codeUnits);
+      bytes += List.from(header)
+        ..addAll(blobs[i])
+        ..addAll('\n'.codeUnits);
     }
     // Reset line spacing: ESC 2 (HEX: 0x1b 0x32)
     bytes += [27, 50];
@@ -802,6 +806,23 @@ class Generator {
 
     bytes += textBytes;
     return bytes;
+  }
+
+  // TSC mode print text
+  List<int> _labelText(
+    String text, {
+    PosStyles styles = const PosStyles(),
+    int colInd = 0,
+    bool isKanji = false,
+    int colWidth = 12,
+    int maxCharsPerLine,
+  }) {
+    var labelCmd = new LabelCmd(60, 40);
+
+    labelCmd.addText(0, 0, FONTTYPE.FONT_1, ROTATION.ROTATION_0, FONTMUL.MUL_1,
+        FONTMUL.MUL_1, text);
+    labelCmd.addPrint(1);
+    return labelCmd.command;
   }
 
   /// Prints one line of styled mixed (chinese and latin symbols) text
