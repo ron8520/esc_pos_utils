@@ -92,63 +92,63 @@ class BarCodeType {
   static const EAN14 = BarCodeType._internal(29);
 
   String get code {
-    if (code == BarCodeType.CODE128.value) {
+    if (value == BarCodeType.CODE128.value) {
       return "128";
-    } else if (code == BarCodeType.CODE128M.value) {
+    } else if (value == BarCodeType.CODE128M.value) {
       return "128M";
-    } else if (code == BarCodeType.EAN128.value) {
+    } else if (value == BarCodeType.EAN128.value) {
       return "EAN128";
-    } else if (code == BarCodeType.ITF25.value) {
+    } else if (value == BarCodeType.ITF25.value) {
       return "25";
-    } else if (code == BarCodeType.ITF25C.value) {
+    } else if (value == BarCodeType.ITF25C.value) {
       return "25C";
-    } else if (code == BarCodeType.CODE39.value) {
+    } else if (value == BarCodeType.CODE39.value) {
       return "39";
-    } else if (code == BarCodeType.CODE39C.value) {
+    } else if (value == BarCodeType.CODE39C.value) {
       return "39C";
-    } else if (code == BarCodeType.CODE39S.value) {
+    } else if (value == BarCodeType.CODE39S.value) {
       return "39S";
-    } else if (code == BarCodeType.CODE93.value) {
+    } else if (value == BarCodeType.CODE93.value) {
       return "93";
-    } else if (code == BarCodeType.EAN13.value) {
+    } else if (value == BarCodeType.EAN13.value) {
       return "EAN13";
-    } else if (code == BarCodeType.EAN13_2.value) {
+    } else if (value == BarCodeType.EAN13_2.value) {
       return "EAN13+2";
-    } else if (code == BarCodeType.EAN13_5.value) {
+    } else if (value == BarCodeType.EAN13_5.value) {
       return "EAN13+5";
-    } else if (code == BarCodeType.EAN8.value) {
+    } else if (value == BarCodeType.EAN8.value) {
       return "EAN8";
-    } else if (code == BarCodeType.EAN8_2.value) {
+    } else if (value == BarCodeType.EAN8_2.value) {
       return "EAN8+2";
-    } else if (code == BarCodeType.EAN8_5.value) {
+    } else if (value == BarCodeType.EAN8_5.value) {
       return "EAN8+5";
-    } else if (code == BarCodeType.CODABAR.value) {
+    } else if (value == BarCodeType.CODABAR.value) {
       return "CODA";
-    } else if (code == BarCodeType.POST.value) {
+    } else if (value == BarCodeType.POST.value) {
       return "POST";
-    } else if (code == BarCodeType.UPCA.value) {
+    } else if (value == BarCodeType.UPCA.value) {
       return "UPCA";
-    } else if (code == BarCodeType.UPCA_2.value) {
+    } else if (value == BarCodeType.UPCA_2.value) {
       return "UPCA+2";
-    } else if (code == BarCodeType.UPCA_5.value) {
+    } else if (value == BarCodeType.UPCA_5.value) {
       return "UPCA+5";
-    } else if (code == BarCodeType.UPCE.value) {
+    } else if (value == BarCodeType.UPCE.value) {
       return "UPCE13";
-    } else if (code == BarCodeType.UPCE_2.value) {
+    } else if (value == BarCodeType.UPCE_2.value) {
       return "UPCE13+2";
-    } else if (code == BarCodeType.UPCE_5.value) {
+    } else if (value == BarCodeType.UPCE_5.value) {
       return "UPCE13+5";
-    } else if (code == BarCodeType.CPOST.value) {
+    } else if (value == BarCodeType.CPOST.value) {
       return "CPOST";
-    } else if (code == BarCodeType.MSI.value) {
+    } else if (value == BarCodeType.MSI.value) {
       return "MSI";
-    } else if (code == BarCodeType.MSIC.value) {
+    } else if (value == BarCodeType.MSIC.value) {
       return "MSIC";
-    } else if (code == BarCodeType.PLESSEY.value) {
+    } else if (value == BarCodeType.PLESSEY.value) {
       return "PLESSEY";
-    } else if (code == BarCodeType.ITF14.value) {
+    } else if (value == BarCodeType.ITF14.value) {
       return "ITF14";
-    } else if (code == BarCodeType.EAN14.value) {
+    } else if (value == BarCodeType.EAN14.value) {
       return "EAN14";
     } else {
       return 'Unknown';
@@ -216,13 +216,13 @@ class EEC {
   static const LEVEL_H = EEC._internal(4);
 
   String get code {
-    if (code == EEC.LEVEL_L.value) {
+    if (value == EEC.LEVEL_L.value) {
       return "L";
-    } else if (code == EEC.LEVEL_M.value) {
+    } else if (value == EEC.LEVEL_M.value) {
       return "M";
-    } else if (code == EEC.LEVEL_Q.value) {
+    } else if (value == EEC.LEVEL_Q.value) {
       return "Q";
-    } else if (code == EEC.LEVEL_H) {
+    } else if (value == EEC.LEVEL_H) {
       return "H";
     } else {
       return "Unknown";
@@ -261,27 +261,27 @@ class FontType {
   static const KOREAN = FontType._internal(11);
 
   String get code {
-    if (code == FontType.FONT_1.value) {
+    if (value == FontType.FONT_1.value) {
       return "1";
-    } else if (code == FontType.FONT_2.value) {
+    } else if (value == FontType.FONT_2.value) {
       return "2";
-    } else if (code == FontType.FONT_3.value) {
+    } else if (value == FontType.FONT_3.value) {
       return "3";
-    } else if (code == FontType.FONT_4.value) {
+    } else if (value == FontType.FONT_4.value) {
       return "4";
-    } else if (code == FontType.FONT_5.value) {
+    } else if (value == FontType.FONT_5.value) {
       return "5";
-    } else if (code == FontType.FONT_6.value) {
+    } else if (value == FontType.FONT_6.value) {
       return "6";
-    } else if (code == FontType.FONT_7.value) {
+    } else if (value == FontType.FONT_7.value) {
       return "7";
-    } else if (code == FontType.FONT_8.value) {
+    } else if (value == FontType.FONT_8.value) {
       return "8";
-    } else if (code == FontType.SIMPLIFIED_CHINESE.value) {
+    } else if (value == FontType.SIMPLIFIED_CHINESE.value) {
       return "TSS24.BF2";
-    } else if (code == FontType.TRADITIONAL_CHINESE.value) {
+    } else if (value == FontType.TRADITIONAL_CHINESE.value) {
       return "TST24.BF2";
-    } else if (code == FontType.KOREAN.value) {
+    } else if (value == FontType.KOREAN.value) {
       return "K";
     } else {
       return "Unknown";
