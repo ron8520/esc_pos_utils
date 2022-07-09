@@ -164,19 +164,19 @@ class BitMap {
   static const xor = PaperSize._internal(2);
 }
 
-class CodePage {
-  const CodePage._internal(this.value);
+class Codepage {
+  const Codepage._internal(this.value);
   final int value;
-  static const PC437 = CodePage._internal(437);
-  static const PC850 = CodePage._internal(850);
-  static const PC852 = CodePage._internal(852);
-  static const PC860 = CodePage._internal(860);
-  static const PC863 = CodePage._internal(863);
-  static const PC865 = CodePage._internal(865);
-  static const WPC1250 = CodePage._internal(1250);
-  static const WPC1252 = CodePage._internal(1252);
-  static const WPC1253 = CodePage._internal(1253);
-  static const WPC1254 = CodePage._internal(1254);
+  static const PC437 = Codepage._internal(437);
+  static const PC850 = Codepage._internal(850);
+  static const PC852 = Codepage._internal(852);
+  static const PC860 = Codepage._internal(860);
+  static const PC863 = Codepage._internal(863);
+  static const PC865 = Codepage._internal(865);
+  static const WPC1250 = Codepage._internal(1250);
+  static const WPC1252 = Codepage._internal(1252);
+  static const WPC1253 = Codepage._internal(1253);
+  static const WPC1254 = Codepage._internal(1254);
 }
 
 class Density {

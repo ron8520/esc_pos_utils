@@ -823,8 +823,8 @@ class Generator {
   }) {
     var labelCmd = new LabelCmd(60, 40);
 
-    labelCmd.addText(0, 0, FONTTYPE.FONT_1, ROTATION.ROTATION_0, FONTMUL.MUL_1,
-        FONTMUL.MUL_1, text);
+    labelCmd.addText(0, 0, FontType.FONT_1, Rotation.ROTATION_0, Fontmul.MUL_1,
+        Fontmul.MUL_1, text);
     labelCmd.addPrint(1);
     return labelCmd.command;
   }
