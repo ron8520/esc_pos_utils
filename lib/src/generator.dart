@@ -352,14 +352,18 @@ class Generator {
   }) {
     List<int> bytes = [];
     if (!containsChinese) {
-      bytes += _text(
-        _encode(text, isKanji: containsChinese),
-        styles: styles,
-        isKanji: containsChinese,
-        maxCharsPerLine: maxCharsPerLine,
-      );
-      // Ensure at least one line break after the text
-      bytes += emptyLines(linesAfter + 1);
+      if (!isLabel) {
+        bytes += _text(
+          _encode(text, isKanji: containsChinese),
+          styles: styles,
+          isKanji: containsChinese,
+          maxCharsPerLine: maxCharsPerLine,
+        );
+        // Ensure at least one line break after the text
+        bytes += emptyLines(linesAfter + 1);
+      } else {
+        bytes += _labelText(text);
+      }
     } else {
       bytes += _mixedKanji(text, styles: styles, linesAfter: linesAfter);
     }
