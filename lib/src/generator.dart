@@ -345,27 +345,46 @@ class Generator {
     PosStyles styles = const PosStyles(),
     int linesAfter = 0,
     bool containsChinese = false,
-    bool isLabel = false,
     int maxCharsPerLine,
   }) {
     List<int> bytes = [];
     if (!containsChinese) {
-      if (!isLabel) {
-        bytes += _text(
-          _encode(text, isKanji: containsChinese),
-          styles: styles,
-          isKanji: containsChinese,
-          maxCharsPerLine: maxCharsPerLine,
-        );
-        // Ensure at least one line break after the text
-        bytes += emptyLines(linesAfter + 1);
-      } else {
-        bytes += _labelText(text);
-      }
+      bytes += _text(
+        _encode(text, isKanji: containsChinese),
+        styles: styles,
+        isKanji: containsChinese,
+        maxCharsPerLine: maxCharsPerLine,
+      );
+      // Ensure at least one line break after the text
+      bytes += emptyLines(linesAfter + 1);
     } else {
       bytes += _mixedKanji(text, styles: styles, linesAfter: linesAfter);
     }
     return bytes;
+  }
+
+  // TSC mode print text
+  List<int> labelText(List<LabelTextRow> texts) {
+    // 40mm width, 30mm height, 1mm Gap between two label
+    var labelCmd = new LabelCmd(40, 30, 2);
+    int offset = 27;
+    int count = 0; // for count row numbers
+    labelCmd.addCls();
+    for (LabelTextRow label in texts) {
+      labelCmd.addText(5, count * offset + 10, label.footType,
+          Rotation.ROTATION_0, Fontmul.MUL_1, Fontmul.MUL_1, label.text);
+      count += 1;
+      if (count > 7) {
+        labelCmd.addPrint(1);
+        labelCmd.addCls();
+        count = 0;
+      }
+    }
+    if (count != 0) {
+      labelCmd.addPrint(1);
+    }
+
+    return labelCmd.command;
   }
 
   /// Skips [n] lines
@@ -808,23 +827,6 @@ class Generator {
 
     bytes += textBytes;
     return bytes;
-  }
-
-  // TSC mode print text
-  List<int> _labelText(
-    String text, {
-    PosStyles styles = const PosStyles(),
-    int colInd = 0,
-    bool isKanji = false,
-    int colWidth = 12,
-    int maxCharsPerLine,
-  }) {
-    var labelCmd = new LabelCmd(60, 40, 0);
-
-    labelCmd.addText(0, 0, FontType.FONT_1, Rotation.ROTATION_0, Fontmul.MUL_1,
-        Fontmul.MUL_1, text);
-    labelCmd.addPrint(1);
-    return labelCmd.command;
   }
 
   /// Prints one line of styled mixed (chinese and latin symbols) text

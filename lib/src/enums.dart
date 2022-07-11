@@ -12,6 +12,7 @@ enum PosAlign { left, center, right }
 enum PosCutMode { full, partial }
 enum PosFontType { fontA, fontB }
 enum PosDrawer { pin2, pin5 }
+enum TscText { header, text }
 
 /// Choose image printing function
 /// bitImageRaster: GS v 0 (obsolete)
@@ -327,3 +328,13 @@ class Speed {
   static const SPEED3 = Speed._internal(3.0);
   static const SPEED4 = Speed._internal(4.0);
 }
+
+class LabelTextRow {
+  String text;
+  FontType footType;
+  TscText textType;
+  LabelTextRow(this.text, this.footType, this.textType);
+}
+
+// ------ TSC Commands Enum Class End ------
+

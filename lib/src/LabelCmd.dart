@@ -12,7 +12,6 @@ class LabelCmd {
     // this.command = new List.filled(4096, 2048, growable: true);
     this.addSize(width, height);
     this.addGap(gap);
-    this.addCls();
   }
 
   // constructor(int width, int height, int gap) {
@@ -54,7 +53,7 @@ class LabelCmd {
 
   void addCashdrwer(Foot m, int t1, int t2) {
     var str = "CASHDRAWER " +
-        m.toString() +
+        m.value.toString() +
         "," +
         t1.toString() +
         "," +
@@ -80,9 +79,9 @@ class LabelCmd {
 
   void addDirection(Direction direction, Mirror mirror) {
     var str = "DIRECTION " +
-        direction.toString() +
+        direction.value.toString() +
         ','.toString() +
-        mirror.toString() +
+        mirror.value.toString() +
         "\r\n";
     this._addStrToCommand(str);
   }
@@ -133,7 +132,7 @@ class LabelCmd {
   // }
 
   void addCodePage(Codepage page) {
-    var str = "CODEPAGE " + page.toString() + "\r\n";
+    var str = "CODEPAGE " + page.value.toString() + "\r\n";
     this._addStrToCommand(str);
   }
 
@@ -159,22 +158,12 @@ class LabelCmd {
 
   void addText(int x, int y, FontType font, Rotation rotation, Fontmul Xscal,
       Fontmul Yscal, String text) {
-    var str = "TEXT " +
-        x.toString() +
-        "," +
-        y.toString() +
-        "," +
+    String str = "TEXT ${x},${y}," +
         "\"" +
         font.code +
-        "\"" +
-        "," +
-        rotation.toString() +
-        "," +
-        Xscal.toString() +
-        "," +
-        Yscal.toString() +
-        "," +
-        "\"" +
+        "\"," +
+        "${rotation.value},${Xscal.value},${Yscal.value}" +
+        ",\"" +
         text +
         "\"" +
         "\r\n";
@@ -197,9 +186,9 @@ class LabelCmd {
         "," +
         height.toString() +
         "," +
-        readable.toString() +
+        readable.value.toString() +
         "," +
-        rotation.toString() +
+        rotation.value.toString() +
         "," +
         narrow.toString() +
         "," +
@@ -272,7 +261,7 @@ class LabelCmd {
         "," +
         'A'.toString() +
         "," +
-        rotation.toString() +
+        rotation.value.toString() +
         "," +
         "\"" +
         data +
