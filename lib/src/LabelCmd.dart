@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:core';
 import 'package:gbk_codec/gbk_codec.dart';
 import 'enums.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
+import 'dart:typed_data';
 
 class LabelCmd {
   // List<int> command;
@@ -234,7 +236,7 @@ class LabelCmd {
 //            }
 //
 //            Log.d("LabelCommand", "codecontent$codecontent")
-//        }
+//          }
 //
 //    }
 
@@ -304,6 +306,11 @@ class LabelCmd {
 
   void addQueryPrinterCodePage() {
     var str = "~!I\r\n";
+    this._addStrToCommand(str);
+  }
+
+  void setQueryPrinterStatus() {
+    var str = "SET RESPONSE ON\r\n";
     this._addStrToCommand(str);
   }
 

@@ -387,6 +387,26 @@ class Generator {
     return labelCmd.command;
   }
 
+  //TSC printer status
+  List<int> labelPrinterStatus() {
+    var labelCmd = new LabelCmd();
+    labelCmd.addQueryPrinterStatus();
+    return labelCmd.command;
+  }
+
+  List<int> setLabelPrinterStatus() {
+    var labelCmd = new LabelCmd();
+    labelCmd.setQueryPrinterStatus();
+    return labelCmd.command;
+  }
+
+  //TSC printer reset
+  List<int> labelPrinterReset() {
+    var labelCmd = new LabelCmd();
+    labelCmd.addResetPrinter();
+    return labelCmd.command;
+  }
+
   /// Skips [n] lines
   ///
   /// Similar to [feed] but uses an alternative command
