@@ -10,7 +10,7 @@ class LabelCmd {
   List<int> command = [];
   static final DEBUG_TAG = "LabelCommand";
 
-  LabelCmd([int width, int height, int gap]) {
+  LabelCmd([int? width, int? height, int? gap]) {
     // this.command = new List.filled(4096, 2048, growable: true);
     this.addSize(width, height);
     this.addGap(gap);
@@ -32,8 +32,9 @@ class LabelCmd {
       try {
         bs = gbk_bytes.encode(str);
         // bs = str.toByteArray(charset("GB2312"));
-      } catch (unsupportedEncodingException) {
-        unsupportedEncodingException.printStackTrace();
+      } catch (unsupportedEncodingException, stacktrace) {
+        print("#### StackTrace");
+        print("$stacktrace");
       }
 
       // for (var i in bs) {
@@ -43,12 +44,12 @@ class LabelCmd {
     }
   }
 
-  void addGap(int gap) {
+  void addGap(int? gap) {
     var str = "GAP ${gap} mm,0 mm\r\n";
     this._addStrToCommand(str);
   }
 
-  void addSize(int width, int height) {
+  void addSize(int? width, int? height) {
     var str = "SIZE ${width} mm,${height} mm\r\n";
     this._addStrToCommand(str);
   }
@@ -123,7 +124,7 @@ class LabelCmd {
     this._addStrToCommand(str);
   }
 
-  void addPrint(int m, [int n]) {
+  void addPrint(int m, [int? n]) {
     var str = "PRINT ${m},${n}\r\n";
     this._addStrToCommand(str);
   }
