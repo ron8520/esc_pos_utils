@@ -12,6 +12,7 @@ import 'package:hex/hex.dart';
 import 'package:image/image.dart';
 import 'package:gbk_codec/gbk_codec.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
+import 'enums.dart';
 import 'commands.dart';
 
 class Generator {
@@ -70,7 +71,7 @@ class Generator {
         .replaceAll("’", "'")
         .replaceAll("´", "'")
         .replaceAll("»", '"')
-        .replaceAll(" ", ' ')
+        .replaceAll(" ", ' ')
         .replaceAll("•", '.');
     if (!isKanji) {
       return latin1.encode(text);
@@ -363,50 +364,6 @@ class Generator {
     return bytes;
   }
 
-  // TSC mode print text
-  List<int> labelText(List<LabelTextRow> texts) {
-    // 40mm width, 30mm height, 1mm Gap between two label
-    var labelCmd = new LabelCmd(40, 30, 2);
-    int offset = 27;
-    int count = 0; // for count row numbers
-    labelCmd.addCls();
-    for (LabelTextRow label in texts) {
-      labelCmd.addText(5, count * offset + 10, label.footType,
-          Rotation.ROTATION_0, Fontmul.MUL_1, Fontmul.MUL_1, label.text);
-      count += 1;
-      if (count > 7) {
-        labelCmd.addPrint(1);
-        labelCmd.addCls();
-        count = 0;
-      }
-    }
-    if (count != 0) {
-      labelCmd.addPrint(1);
-    }
-
-    return labelCmd.command;
-  }
-
-  //TSC printer status
-  List<int> labelPrinterStatus() {
-    var labelCmd = new LabelCmd();
-    labelCmd.addQueryPrinterStatus();
-    return labelCmd.command;
-  }
-
-  List<int> setLabelPrinterStatus() {
-    var labelCmd = new LabelCmd();
-    labelCmd.setQueryPrinterStatus();
-    return labelCmd.command;
-  }
-
-  //TSC printer reset
-  List<int> labelPrinterReset() {
-    var labelCmd = new LabelCmd();
-    labelCmd.addResetPrinter();
-    return labelCmd.command;
-  }
-
   /// Skips [n] lines
   ///
   /// Similar to [feed] but uses an alternative command
@@ -585,16 +542,17 @@ class Generator {
         final List<bool> isLexemeChinese = list[1];
 
         // Print each lexeme using codetable OR kanji
+        int? colIndex = colInd;
         for (var j = 0; j < lexemes.length; ++j) {
           bytes += _text(
             _encode(lexemes[j], isKanji: isLexemeChinese[j]),
             styles: cols[i].styles,
-            colInd: colInd,
+            colInd: colIndex,
             colWidth: cols[i].width,
             isKanji: isLexemeChinese[j],
           );
           // Define the absolute position only once (we print one line only)
-          // colInd = null;
+          colIndex = null;
         }
       }
     }
@@ -602,7 +560,7 @@ class Generator {
     bytes += emptyLines(1);
 
     if (isNextRow) {
-      row(nextRow);
+      bytes += row(nextRow);
     }
     return bytes;
   }
@@ -879,4 +837,48 @@ class Generator {
     return bytes;
   }
   // ************************ (end) Internal command generators ************************
+
+  // TSC mode print text
+  List<int> labelText(List<LabelTextRow> texts) {
+    // 40mm width, 30mm height, 1mm Gap between two label
+    var labelCmd = new LabelCmd(40, 30, 2);
+    int offset = 27;
+    int count = 0; // for count row numbers
+    labelCmd.addCls();
+    for (LabelTextRow label in texts) {
+      labelCmd.addText(5, count * offset + 10, label.footType,
+          Rotation.ROTATION_0, Fontmul.MUL_1, Fontmul.MUL_1, label.text);
+      count += 1;
+      if (count > 7) {
+        labelCmd.addPrint(1);
+        labelCmd.addCls();
+        count = 0;
+      }
+    }
+    if (count != 0) {
+      labelCmd.addPrint(1);
+    }
+
+    return labelCmd.command;
+  }
+
+  //TSC printer status
+  List<int> labelPrinterStatus() {
+    var labelCmd = new LabelCmd();
+    labelCmd.addQueryPrinterStatus();
+    return labelCmd.command;
+  }
+
+  List<int> setLabelPrinterStatus() {
+    var labelCmd = new LabelCmd();
+    labelCmd.setQueryPrinterStatus();
+    return labelCmd.command;
+  }
+
+  //TSC printer reset
+  List<int> labelPrinterReset() {
+    var labelCmd = new LabelCmd();
+    labelCmd.addResetPrinter();
+    return labelCmd.command;
+  }
 }
