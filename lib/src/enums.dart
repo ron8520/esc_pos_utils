@@ -9,9 +9,13 @@
 import 'package:esc_pos_utils/esc_pos_utils.dart';
 
 enum PosAlign { left, center, right }
+
 enum PosCutMode { full, partial }
+
 enum PosFontType { fontA, fontB }
+
 enum PosDrawer { pin2, pin5 }
+
 enum TscText { header, text }
 
 /// Choose image printing function
@@ -333,7 +337,8 @@ class LabelTextRow {
   String text;
   FontType footType;
   TscText textType;
-  LabelTextRow(this.text, this.footType, this.textType);
+  Rotation rotation;
+  LabelTextRow(this.text, this.footType, this.rotation, this.textType);
 }
 
 // ------ TSC Commands Enum Class End ------
