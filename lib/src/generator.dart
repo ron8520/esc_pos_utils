@@ -862,6 +862,12 @@ class Generator {
     return labelCmd.command;
   }
 
+  List<int> setLabelDirection(Direction direction, Mirror mirror) {
+    var labelCmd = new LabelCmd();
+    labelCmd.addDirection(direction, mirror);
+    return labelCmd.command;
+  }
+
   //TSC printer status
   List<int> labelPrinterStatus() {
     var labelCmd = new LabelCmd();
