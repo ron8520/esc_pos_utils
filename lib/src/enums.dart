@@ -338,7 +338,8 @@ class LabelTextRow {
   FontType footType;
   TscText textType;
   Rotation rotation;
-  LabelTextRow(this.text, this.footType, this.rotation, this.textType);
+  int x;
+  LabelTextRow(this.text, this.footType, this.textType, this.rotation, this.x);
 }
 
 // ------ TSC Commands Enum Class End ------

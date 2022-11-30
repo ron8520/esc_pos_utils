@@ -846,8 +846,8 @@ class Generator {
     int count = 0; // for count row numbers
     labelCmd.addCls();
     for (LabelTextRow label in texts) {
-      labelCmd.addText(5, count * offset + 10, label.footType, label.rotation,
-          Fontmul.MUL_1, Fontmul.MUL_1, label.text);
+      labelCmd.addText(label.x, count * offset + 10, label.footType,
+          label.rotation, Fontmul.MUL_1, Fontmul.MUL_1, label.text);
       count += 1;
       if (count > 7) {
         labelCmd.addPrint(1);
